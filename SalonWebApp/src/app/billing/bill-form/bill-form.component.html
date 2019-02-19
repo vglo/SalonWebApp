@@ -1,0 +1,56 @@
+<form [formGroup]="billForm">
+  <div formArrayName="particulars">
+    <div *ngFor="let part of getControls(billForm,'particulars') ; let i=index;">
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px" [formGroupName]="i" fxLayout.lt-md="column"
+        fxLayoutAlign.lt-md="start start">
+        <span fxFlex="5%">{{i+1}}</span>
+        <mat-form-field fxFlex="60%" class="full-width">
+          <mat-select required #serviceSelect formControlName="particular" placeholder="Service"
+            (selectionChange)="changeRate(i,serviceSelect.selected)">
+            <mat-option *ngFor="let service of salonServices" [value]="service.id"
+              (selectionChange)="changeRate(i,service)">
+              {{service.name}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="!serviceSelect.valid">Required</mat-error>
+        </mat-form-field>
+        <mat-form-field fxFlex="15%" class="full-width">
+          <mat-placeholder>
+            <!-- <mat-icon fontSet="fas" fontIcon="fa-rupee"></mat-icon> -->
+            &nbsp; Rate
+          </mat-placeholder>
+          <span>{{part.controls['rate'].value}}</span>
+          <input matInput type="number" hidden formControlName="rate">
+          <mat-icon matPrefix class="mat-icon-12" fontSet="fas" fontIcon="fa-rupee"></mat-icon>
+        </mat-form-field>
+        <mat-form-field fxFlex="15%" class="full-width">
+          <mat-placeholder>
+            <!-- <mat-icon fontSet="fas" fontIcon="fa-rupee"></mat-icon> -->
+            &nbsp; Quantity
+          </mat-placeholder>
+
+          <input matInput #quantity type="number" (input)="calculateAmount(i)" (change)="calculateAmount(i)"
+            formControlName="quantity" min="0">
+          <mat-error *ngIf="!quantity.valid">Invalid</mat-error>
+          <mat-icon matPrefix class="mat-icon-12" fontSet="fas" fontIcon="fa-rupee"></mat-icon>
+        </mat-form-field>
+        <mat-form-field fxFlex="15%" class="full-width">
+          <mat-placeholder>
+            <!-- <mat-icon fontSet="fas" fontIcon="fa-rupee"></mat-icon> -->
+            &nbsp; Amount
+          </mat-placeholder>
+          <span>{{part.controls['amount'].value}}</span>
+          <input matInput type="number" hidden formControlName="amount">
+          <mat-icon matPrefix class="mat-icon-12" fontSet="fas" fontIcon="fa-rupee"></mat-icon>
+        </mat-form-field>
+        <mat-icon (click)="removeParticular(i)" matTooltip="Delete" matTooltipPosition="above">delete</mat-icon>
+      </div>
+    </div>
+  </div>
+  <div fxLayout.gt-md="row wrap" fxLayoutAlign.gt-md="space-between center" fxLayoutGap.gt-md="50px">
+    <mat-icon fxFlex (click)="addParticular()" matTooltip="Add" matTooltipPosition="above" class="mat-18">add</mat-icon>
+    <h3 fxFlex>Total: {{total}}</h3>
+  </div>
+
+  <!-- <mat-icon (click)="submitForm()" class="mat-18">save</mat-icon> -->
+</form>

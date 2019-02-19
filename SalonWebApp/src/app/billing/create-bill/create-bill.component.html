@@ -1,0 +1,88 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <h2>
+        <mat-icon class="mat-18">shopping_cart</mat-icon> Billing!
+      </h2>
+    </mat-card-title>
+    <mat-card-subtitle>New Bill</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content style="margin-top: 100px;" fxLayout.gt-md="column wrap" fxLayoutAlign.gt-md="center stretch"
+    fxLayoutGap.gt-md="10px">
+    <mat-tab-group>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          Existing Customer
+        </ng-template>
+
+        <mat-vertical-stepper [linear]="true" #stepperExistingCustomer>
+          <mat-step [stepControl]="customerSelectForm">
+            <ng-template matStepLabel>Select Customer</ng-template>
+            <form [formGroup]="customerSelectForm">
+                <mat-form-field class="example-full-width">
+                    <input type="text" #customerId required placeholder="Pick one" aria-label="Number" matInput formControlName="customerId" [matAutocomplete]="auto">
+                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete"  [displayWith]="custSelectDisplay" >
+                      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                        {{option.name}}
+                      </mat-option>
+                    </mat-autocomplete>
+                    <mat-error *ngIf="!customerId.valid">Required</mat-error>
+                  </mat-form-field>
+            </form>
+            <div>
+              <button mat-button matStepperNext matTooltip="Next" matTooltipPosition="above" >Next</button>
+            </div>
+          </mat-step>
+          <mat-step [stepControl]="billForm">
+            <ng-template matStepLabel>
+              <div fxLayout.gt-md="row wrap" fxLayoutAlign.gt-md="center center" fxLayoutGap.gt-md="5px">
+                <mat-icon>account_balance_wallet</mat-icon>
+                <p>Create Bill</p>
+              </div>
+            </ng-template>
+            <app-bill-form fxFlex="80%" (totalChange)="calculateGrandTotal($event)" [(total)]="billTotal" [(formGroup)]="billForm" [(formData)]="billParticulars"></app-bill-form>
+            <div fxLayout.gt-md="row wrap" fxLayoutGap="5px">
+                <button mat-button matStepperPrevious matTooltip="Back" matTooltipPosition="above">Back</button>
+                <button mat-button matStepperNext matTooltip="Next" matTooltipPosition="above">Next</button>
+            </div>
+          </mat-step>
+          <mat-step>
+            <ng-template matStepLabel>Done</ng-template>
+            <mat-card class="border" fxLayout.gt-md="row wrap"
+            fxLayoutAlign.gt-md="start center"
+            fxLayoutGap.gt-md="0px">
+                <div fxFlex="80%">
+                    <h1>You are now done.</h1>
+                </div>
+                <div fxFlex>
+                    <p>Total: {{billTotal}} </p>
+                    <p>cgst + {{cgstVal}} </p>
+                    <p>sgst + {{sgstVal}} </p>
+                    <p>Discount - {{discountVal}} </p>
+                    <h3>Grand Total: {{grandTotal}}</h3>
+                </div>
+                
+            </mat-card>
+            
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button (click)="stepperExistingCustomer.reset()">Reset</button>
+              <button matTooltip="Save" matTooltipPosition="above" fxFlex="5%" mat-button (click)="submitForm()">
+                Save
+              </button>
+            </div>
+          </mat-step>
+        </mat-vertical-stepper>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          New Customer
+        </ng-template>
+        <h1>Feature not availabe in demo.</h1>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card-content>
+  <mat-card-footer>
+
+  </mat-card-footer>
+</mat-card>

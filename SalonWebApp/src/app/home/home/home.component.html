@@ -1,0 +1,40 @@
+<div>
+<mat-sidenav-container>
+    <mat-sidenav #sidenav [opened]="!mobileQuery.matches" class="side-nav side-nav-bar" [mode]="mobileQuery.matches ? 'over' : 'side'" (swipeleft)="sidenav.close()">
+      <app-side-nav></app-side-nav>
+    </mat-sidenav>
+    <mat-sidenav-content role="toolbar" class="side-nav-content" (swiperight)="sidenav.open()" (swipeleft)="sidenav.close()">
+      <mat-toolbar color="primary">
+          <span>
+            <button mat-icon-button (click)="sidenav.toggle()" ><mat-icon>menu</mat-icon></button>
+          </span>
+          <span class="space-filler"></span>
+          <button mat-icon-button [matMenuTriggerFor]="toolbarMenu"><mat-icon>more_vert</mat-icon></button>
+        </mat-toolbar>
+        <div class="content-home">
+           
+        </div>
+        <mat-menu  #toolbarMenu="matMenu">
+            <div mat-menu-item>
+                <mat-slide-toggle #themeToggle (toggleChange)="toggleTheme()" >Dark Mode</mat-slide-toggle>
+            </div>
+          </mat-menu>
+
+          <div fxLayout.gt-md="row wrap"
+          fxLayoutAlign.gt-md="start stretch"
+          fxLayoutGap.gt-md="50px" class="container">
+            <div fxFlex="80%">
+              <router-outlet></router-outlet>
+            </div>    
+            <div fxFlex>
+              <router-outlet name="sideoutlet"></router-outlet>
+            </div>
+              
+          </div>
+
+          <button matTooltip="Toggle Dark Theme" [matTooltipPosition]="'above'" class="fab-button" mat-fab (click)="toggleTheme();themeToggle.toggle()" color="accent">
+              <mat-icon class="mat-18">sync</mat-icon>
+          </button>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+</div>

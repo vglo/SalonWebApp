@@ -1,0 +1,74 @@
+<mat-card class="user-card" fxLayout="column nowrap"
+fxLayoutAlign="space-around end"
+fxLayoutGap="20px">
+    <mat-card-header fxFlexFill>
+        <img matCardAvatar src="{{avatarUrl}}">
+        <mat-card-title>Name</mat-card-title>
+        <mat-card-subtitle>mail@email.com</mat-card-subtitle>
+    </mat-card-header>
+    
+    <mat-card-actions align="end">
+        <button  mat-icon-button>
+            <mat-icon class="mat-18">more_vert</mat-icon>
+        </button>
+    </mat-card-actions>
+  </mat-card>
+  <mat-list>
+    <h3 mat-subheader>General</h3>
+      <mat-list-item [routerLink]="'/home'">
+          <button mat-icon-button>
+              <mat-icon class="mat-18">home</mat-icon>
+          </button>
+          <span matLine>Home</span>
+        </mat-list-item>
+    <mat-divider></mat-divider>
+    <h3 mat-subheader>Customer</h3>
+    <mat-list-item>
+      <button mat-icon-button>
+          <mat-icon class="mat-18">add</mat-icon>
+      </button>
+      <span matLine>New Registration</span>
+    </mat-list-item>
+    <mat-list-item>
+        <button mat-icon-button>
+            <mat-icon class="mat-18">search</mat-icon>
+        </button>
+        <span matLine>Search</span>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+     <h3 mat-subheader>Billing</h3>
+     <mat-list-item [routerLink]="'bill/create-bill'">
+        <button mat-icon-button>
+            <mat-icon class="mat-18">add</mat-icon>
+        </button>
+        <span matLine>New Bill</span>
+      </mat-list-item>
+      <mat-list-item>
+          <button mat-icon-button>
+              <mat-icon class="mat-18">search</mat-icon>
+          </button>
+          <span matLine>Search Bill</span>
+        </mat-list-item>
+        <mat-list-item>
+            <button mat-icon-button>
+                <mat-icon class="mat-18">account_balance_wallet</mat-icon>
+            </button>
+            <span matLine>Bill Summary</span>
+          </mat-list-item>
+      <mat-divider></mat-divider>
+      <h3 mat-subheader>Administration</h3>
+      <mat-list-item>
+          <button mat-icon-button>
+              <mat-icon class="mat-18">account_circle</mat-icon>
+          </button>
+          <span matLine>Staff Management</span>
+        </mat-list-item>  
+        <mat-list-item>
+            <button mat-icon-button>
+                <mat-icon class="mat-18">announcement</mat-icon>
+            </button>
+            <span matLine>View Franchise</span>
+          </mat-list-item>
+     <mat-divider></mat-divider>
+    <h3 mat-subheader>Personal</h3>
+  </mat-list>
