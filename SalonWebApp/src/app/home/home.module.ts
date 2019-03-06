@@ -8,14 +8,17 @@ import { MaterialImportsModule } from '../material-imports/material-imports.modu
 import { MediaMatcher } from '@angular/cdk/layout';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { CustomerModule } from '../customer/customer.module';
+import { NotAvailableComponent } from './not-available/not-available.component';
 
 @NgModule({
-  declarations: [HomeComponent, SideNavComponent, DashboardComponent],
+  declarations: [HomeComponent, SideNavComponent, DashboardComponent, NotAvailableComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,
     SharedModule,
-    MaterialImportsModule
+    MaterialImportsModule,
+    CustomerModule
   ],
   exports: [HomeComponent],
   providers:[MediaMatcher]

@@ -1,0 +1,21 @@
+<div>
+  <form fxFlex fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="20px" [formGroup]="serviceRegistration" >
+    <mat-form-field fxFlex appearance="outline">
+      <mat-label>Service Name</mat-label>
+      <input formControlName="name" required matInput placeholder="Service Name">
+      <mat-icon matSuffix>shopping_basket</mat-icon>
+      <mat-hint>Eg. Haircut</mat-hint>
+      <mat-error>Required</mat-error>
+    </mat-form-field>
+    <mat-form-field fxFlex appearance="outline">
+      <mat-label>Price</mat-label>
+      <input formControlName="price" required type="number" min="0" matInput placeholder="Price">
+      <mat-icon matSuffix>account_balance_wallet</mat-icon>
+      <mat-hint>INR</mat-hint>
+      <mat-error>Invalid!</mat-error>
+    </mat-form-field>
+  </form>
+</div>
+<div align="right">
+    <button [disabled]="!serviceRegistration.valid" (click)="submitForm()" mat-button>Save</button>
+</div>

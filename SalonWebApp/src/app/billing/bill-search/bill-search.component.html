@@ -1,0 +1,12 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+          <h1> <mat-icon >search</mat-icon> Search Bill! </h1>
+        </mat-card-title>
+        <mat-card-subtitle>Search</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <app-bill-search-form (billInfoChange)="setBillInfo($event)" ></app-bill-search-form>
+        <app-view-bill [billInfo]="billFormData" ></app-view-bill>
+    </mat-card-content>
+</mat-card>

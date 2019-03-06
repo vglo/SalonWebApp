@@ -6,7 +6,7 @@ fxLayoutGap="20px">
         <mat-card-title>Name</mat-card-title>
         <mat-card-subtitle>mail@email.com</mat-card-subtitle>
     </mat-card-header>
-    
+    <img src="assets/images/Jawed-Habib-Logo-1.png" width="300px">
     <mat-card-actions align="end">
         <button  mat-icon-button>
             <mat-icon class="mat-18">more_vert</mat-icon>
@@ -23,13 +23,13 @@ fxLayoutGap="20px">
         </mat-list-item>
     <mat-divider></mat-divider>
     <h3 mat-subheader>Customer</h3>
-    <mat-list-item>
+    <mat-list-item [routerLink]="'customer/register-customer'">
       <button mat-icon-button>
           <mat-icon class="mat-18">add</mat-icon>
       </button>
       <span matLine>New Registration</span>
     </mat-list-item>
-    <mat-list-item>
+    <mat-list-item [routerLink]="'customer/search-customer'">
         <button mat-icon-button>
             <mat-icon class="mat-18">search</mat-icon>
         </button>
@@ -43,13 +43,13 @@ fxLayoutGap="20px">
         </button>
         <span matLine>New Bill</span>
       </mat-list-item>
-      <mat-list-item>
+      <mat-list-item [routerLink]="'bill/search-bill'">
           <button mat-icon-button>
               <mat-icon class="mat-18">search</mat-icon>
           </button>
           <span matLine>Search Bill</span>
         </mat-list-item>
-        <mat-list-item>
+        <mat-list-item [routerLink]="'bill/bill-summary'">
             <button mat-icon-button>
                 <mat-icon class="mat-18">account_balance_wallet</mat-icon>
             </button>
@@ -57,13 +57,19 @@ fxLayoutGap="20px">
           </mat-list-item>
       <mat-divider></mat-divider>
       <h3 mat-subheader>Administration</h3>
-      <mat-list-item>
+      <mat-list-item [routerLink]="'admin/service-management'">
+        <button mat-icon-button>
+            <mat-icon class="mat-18">ballot</mat-icon>
+        </button>
+        <span matLine>Services Management</span>
+      </mat-list-item>
+      <mat-list-item [routerLink]="'admin/staff'">
           <button mat-icon-button>
               <mat-icon class="mat-18">account_circle</mat-icon>
           </button>
           <span matLine>Staff Management</span>
         </mat-list-item>  
-        <mat-list-item>
+        <mat-list-item [routerLink]="'admin/franchise'">
             <button mat-icon-button>
                 <mat-icon class="mat-18">announcement</mat-icon>
             </button>

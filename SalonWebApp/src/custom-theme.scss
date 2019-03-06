@@ -9,10 +9,46 @@
 // Be sure that you only ever include this mixin once!
 @include mat-core();
 
+
+// Colors
+$mat-habib-red: (
+    50 : #f9e7e4,
+    100 : #efc2bb,
+    200 : #e49a8e,
+    300 : #d97160,
+    400 : #d1523e,
+    500 : #c9341c,
+    600 : #c32f19,
+    700 : #bc2714,
+    800 : #b52111,
+    900 : #a91509,
+    A100 : #ffd7d5,
+    A200 : #ffa7a2,
+    A400 : #ff766f,
+    A700 : #ff5d56,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$SalonWebApp-light-primary: mat-palette($mat-red,800);
+$SalonWebApp-light-primary: mat-palette($mat-habib-red,500);
 $SalonWebApp-light-accent: mat-palette($mat-blue-gray, 900);
 $SalonWebApp-dark-accent: mat-palette($mat-blue-gray, 200);
 
@@ -47,4 +83,6 @@ $matRed: mat-palette($mat-red,500);
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
 

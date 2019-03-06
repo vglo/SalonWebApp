@@ -1,0 +1,22 @@
+<form [formGroup]="billInfo">
+  <mat-form-field style="width: 100%">
+    <input type="text" formControlName="bill" required placeholder="Pick one"
+      aria-label="Number" matInput [matAutocomplete]="auto" #customer >
+    <mat-autocomplete (optionSelected)="setBillInfo()" autoActiveFirstOption #auto="matAutocomplete" [displayWith]="billSelectDisplay">
+      <mat-option *ngFor="let option of filteredOptions | async" [value]="option" style="height: inherit">
+        <div fxLayout="row wrap"
+        fxLayoutAlign="start start"
+        fxLayoutGap="0px">
+        <div fxFlex="80%">
+          <mat-icon>account_balance_wallet</mat-icon>{{option.billNo}} 
+        </div>
+        <div fxFlex="10%"> <mat-icon>account_circle</mat-icon> {{option.customerinfo.firstName}} {{option.customerinfo.lastName}}</div>
+      </div>
+      </mat-option>
+    </mat-autocomplete>
+    <mat-label>
+      <mat-icon>search</mat-icon> &nbsp; Bill Number or Customer Name
+    </mat-label>
+    <mat-error *ngIf="!billInfo.valid">Required</mat-error>
+  </mat-form-field>
+</form>

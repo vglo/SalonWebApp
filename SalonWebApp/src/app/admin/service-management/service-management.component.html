@@ -1,0 +1,23 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title> <h2>Service Management</h2> </mat-card-title>
+        <mat-card-subtitle>Manage salon services</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-tab-group>
+          <mat-tab>
+              <ng-template mat-tab-label>
+                  Service Registration
+              </ng-template>
+              <app-service-registration></app-service-registration>
+          </mat-tab>
+          <mat-tab>
+              <ng-template mat-tab-label>
+                  Service List
+              </ng-template>
+              <app-service-list></app-service-list>
+          </mat-tab>
+      </mat-tab-group>
+      
+    </mat-card-content>
+</mat-card>

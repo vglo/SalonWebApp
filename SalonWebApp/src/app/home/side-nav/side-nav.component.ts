@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class SideNavComponent implements OnInit {
 
-  @Input('avatarUrl') avatarUrl : String ='assets/images/avatar.jpg';
+  @Input('avatarUrl') avatarUrl : String ='assets/images/avatar.png';
 
 
   @Input('backgroundUrl') backgroundUrl: String ='assets/images/cover.jpg';

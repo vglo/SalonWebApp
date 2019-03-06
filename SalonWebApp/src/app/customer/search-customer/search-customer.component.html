@@ -1,0 +1,26 @@
+<div fxLayout="column nowrap" fxLayoutAlign="center center" fxLayoutGap="20px">
+    <mat-card fxFlexFill>
+        <mat-card-header>
+            <mat-card-title>Customers!</mat-card-title>
+            <mat-card-subtitle>Search</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <app-search-customer-form (customerInfoChange)="infoChanged($event)"></app-search-customer-form>
+        </mat-card-content>
+    </mat-card>
+    <mat-card style="min-width: 40%" *ngIf="customerInfo !==undefined">
+        <p fxLayout="row nowrap" fxLayoutAlign="center center" fxLayoutGap="5px">
+            <mat-icon fxFlex="20%" class="mat-18">face</mat-icon> <span fxFlex> {{customerInfo.firstName}}
+                {{customerInfo.lastName}}</span>
+        </p>
+        <p fxLayout="row nowrap" fxLayoutAlign="center center" fxLayoutGap="5px">
+            <mat-icon fxFlex="20%">phone</mat-icon> <span fxFlex> {{customerInfo.mobile}}</span>
+        </p>
+        <p fxLayout="row nowrap" fxLayoutAlign="center center" fxLayoutGap="5px">
+            <mat-icon fxFlex="20%">email</mat-icon> <span fxFlex> {{customerInfo.email}}</span>
+        </p>
+        <p fxLayout="row nowrap" fxLayoutAlign="center center" fxLayoutGap="5px">
+            <mat-icon fxFlex="20%">location_on</mat-icon> <span fxFlex> {{customerInfo.address}}</span>
+        </p>
+    </mat-card>
+</div>

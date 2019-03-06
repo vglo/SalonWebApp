@@ -1,0 +1,126 @@
+<mat-card>
+  <div *ngIf="_billInfo === undefined; then invalidBill else validBill"></div>
+  <ng-template #invalidBill>
+    <div>
+      <h1>No bill found.</h1>
+    </div>
+  </ng-template>
+  <ng-template #validBill>
+    <div id="invoice" fxLayout="column wrap" fxLayoutAlign="start stretch" fxLayoutGap="10px">
+      <div fxFlex="100%" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+        <div fxFlex="20">Bill No:</div>
+        <div fxFlex="50%">{{_billInfo.billNo}}</div>
+      </div>
+      <div fxFlex="100%" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+        <div fxFlex="20%">Date:</div>
+        <div fxFlex="50%">{{_billInfo.date | date:'dd/MM/yyyy'}}</div>
+      </div>
+      <div fxFlex="100%" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="2px">
+        <div fxFlex="100%">
+          <h4>Customer Info</h4>
+        </div>
+        <div fxFlex="100%">{{_billInfo.customerinfo.firstName}} {{_billInfo.customerinfo.lastName}} </div>
+        <div fxFlex="100%"> {{_billInfo.customerinfo.email}} </div>
+        <div fxFlex="100%"> {{_billInfo.customerinfo.mobile}} </div>
+        <div fxFlex="100%"> {{_billInfo.customerinfo.address}} </div>
+      </div>
+      <div fxFlex="100%" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+        <table fxFlex="100%" mat-table [dataSource]="tableDataSource">
+          <!-- Position Column -->
+          <ng-container matColumnDef="position">
+            <th mat-header-cell *matHeaderCellDef> No. </th>
+            <td mat-cell *matCellDef="let i=index;"> {{i+1}} </td>
+            <td mat-footer-cell *matFooterCellDef> Total </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Service </th>
+            <td mat-cell *matCellDef="let element"> {{element.salonservice.name}} </td>
+            <td mat-footer-cell *matFooterCellDef> </td>
+          </ng-container>
+
+          <ng-container matColumnDef="rate">
+            <th mat-header-cell *matHeaderCellDef> Rate </th>
+            <td mat-cell *matCellDef="let element"> {{element.salonservice.price}} </td>
+            <td mat-footer-cell *matFooterCellDef> </td>
+          </ng-container>
+
+          <ng-container matColumnDef="quantity">
+            <th mat-header-cell *matHeaderCellDef> Quantity </th>
+            <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+            <td mat-footer-cell *matFooterCellDef> </td>
+          </ng-container>
+
+          <ng-container matColumnDef="amount">
+            <th mat-header-cell *matHeaderCellDef> Amount </th>
+            <td mat-cell *matCellDef="let element"> {{element.quantity * element.salonservice.price}} </td>
+            <td mat-footer-cell *matFooterCellDef> {{getTotal()}} </td>
+          </ng-container>
+
+
+
+          <ng-container matColumnDef="cgst">
+            <td mat-footer-cell colspan="4" *matFooterCellDef>
+              CGST @ {{_billInfo.cgstPer}}%
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="cgstvalue">
+            <td mat-footer-cell colspan="4" *matFooterCellDef>
+              + {{_billInfo.csgtVal}}
+            </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="sgst">
+            <td mat-footer-cell colspan="4" *matFooterCellDef>
+              SGST @ {{_billInfo.sgstPer}}%
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="sgstvalue">
+            <td mat-footer-cell colspan="1" *matFooterCellDef>
+             + {{_billInfo.sgstVal}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="discount">
+            <td mat-footer-cell colspan="4" *matFooterCellDef>
+              Discount (INR)
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="discountvalue">
+            <td mat-footer-cell colspan="1" *matFooterCellDef>
+              - {{_billInfo.discountVal}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="grandtotal">
+            <td mat-footer-cell colspan="4" *matFooterCellDef>
+              Grand Total
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="grandtotalvalue">
+            <td mat-footer-cell colspan="1" *matFooterCellDef>
+              {{_billInfo.grandTotal}}
+            </td>
+          </ng-container>
+
+
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;let i=index"></tr>
+          <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+          <tr mat-footer-row *matFooterRowDef="['cgst','cgstvalue']"></tr>
+          <tr mat-footer-row *matFooterRowDef="['sgst','sgstvalue']"></tr>
+          <tr mat-footer-row *matFooterRowDef="['discount','discountvalue']"></tr>
+          <tr class="bold-row" mat-footer-row *matFooterRowDef="['grandtotal','grandtotalvalue']"></tr>
+        </table>
+      </div>
+    </div>
+  </ng-template>
+
+  <mat-card-actions align="right" >
+    <button mat-button (click)="sendMail()">Send Email</button>
+  </mat-card-actions>
+
+</mat-card>

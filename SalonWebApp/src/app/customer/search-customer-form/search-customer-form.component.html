@@ -1,0 +1,23 @@
+<form [formGroup]="customerInfo">
+  <mat-form-field style="width: 100%">
+    <input type="text" formControlName="customer" required placeholder="Pick one"
+      aria-label="Number" matInput [matAutocomplete]="auto" #customer >
+    <mat-autocomplete (optionSelected)="setCustInfo()" autoActiveFirstOption #auto="matAutocomplete" [displayWith]="custSelectDisplay">
+      <mat-option *ngFor="let option of filteredOptions | async" [value]="option" style="height: inherit">
+        <div fxLayout="row wrap"
+        fxLayoutAlign="start start"
+        fxLayoutGap="0px">
+        <div fxFlex="80%">
+          <mat-icon>account_circle</mat-icon> {{option.firstName}} {{option.lastName}}
+        </div>
+        <div fxFlex="10%"> <mat-icon>phone</mat-icon> {{option.mobile}}</div>
+      </div>
+        
+      </mat-option>
+    </mat-autocomplete>
+    <mat-label>
+      <mat-icon>search</mat-icon> &nbsp; Name or Mobile
+    </mat-label>
+    <mat-error *ngIf="!customerInfo.valid">Required</mat-error>
+  </mat-form-field>
+</form>

@@ -1,0 +1,71 @@
+<form [formGroup]="customerRegistrationForm">
+  <div fxLayout.gt-md="row wrap" fxLayoutAlign="start center" fxLayoutGap.gt-md="20px">
+    <div>
+      <mat-icon fxFlex="2%">face</mat-icon>
+    </div>
+    <mat-form-field fxFlex appearance="outline">
+      <mat-label>
+        <mat-icon>input</mat-icon>
+        First Name
+      </mat-label>
+      <input formControlName="firstName" required matInput type="text">
+      <mat-error *ngIf="!customerRegistrationForm.controls['firstName'].valid">Required</mat-error>
+    </mat-form-field>
+    <mat-form-field fxFlex appearance="outline">
+      <mat-label>
+        <mat-icon>input</mat-icon>
+        Last Name
+      </mat-label>
+      <input formControlName="lastName" matInput type="text">
+      <mat-error *ngIf="!customerRegistrationForm.controls['lastName'].valid">Required</mat-error>
+    </mat-form-field>
+  </div>
+  <div fxLayout.gt-md="row wrap" fxLayoutAlign="start center" fxLayoutGap.gt-md="20px">
+    <div>
+      <mat-icon fxFlex="2%">contacts</mat-icon>
+    </div>
+    <mat-form-field fxFlex appearance="outline">
+      <mat-label>
+        <mat-icon>phone</mat-icon>
+        Phone
+      </mat-label>
+      <input matInput type="tel" required formControlName="mobile">
+      <mat-error *ngIf="!customerRegistrationForm.controls['mobile'].valid">Invalid!</mat-error>
+    </mat-form-field>
+    <mat-form-field fxFlex appearance="outline">
+      <mat-label>
+        <mat-icon>email</mat-icon>
+        Email
+      </mat-label>
+      <input matInput type="email" formControlName="email">
+      <mat-error *ngIf="!customerRegistrationForm.controls['email'].valid">Invalid!</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div fxLayout.gt-md="row wrap" fxLayoutAlign="start center" fxLayoutGap.gt-md="20px">
+    <div>
+      <mat-icon fxFlex="2%">person_pin_circle</mat-icon>
+    </div>
+    <mat-form-field fxFlex appearance="outline">
+      <mat-label>
+        <mat-icon>location_city</mat-icon>
+        Address
+      </mat-label>
+      <input matInput type="text" formControlName="address" >
+    </mat-form-field>
+    <mat-form-field fxFlex appearance="outline">
+      <mat-label>
+        <mat-icon>date_range</mat-icon>
+        Date of Birth
+      </mat-label>
+      <input formControlName="dob" matInput [matDatepicker]="picker">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <div fxLayout="row wrap" fxLayoutAlign="center center" >
+    <button fxFlex="2%" mat-raised-button (click)="submitForm()" [disabled]="!customerRegistrationForm.valid">Save</button>
+  </div>
+  
+
+</form>

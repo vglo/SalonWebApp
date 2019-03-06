@@ -1,0 +1,73 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            <h1>
+                <mat-icon class="mat-18">assessment</mat-icon> Bill Summary
+            </h1>
+        </mat-card-title>
+        <mat-card-subtitle>Reports</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+        <form [formGroup]="dateRange">
+            <div>
+                <mat-form-field>
+                    <input #startDate matInput [matDatepicker]="startDatePicker" formControlName="startDate"
+                        placeholder="Start Date" (dateChange)="onRangeChange()">
+                    <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+                    <mat-datepicker touchUi="true" disabled="false" #startDatePicker></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field>
+                    <input #endDate matInput [matDatepicker]="endDatePicker" formControlName="endDate"
+                        placeholder="End Date" (dateChange)="onRangeChange()">
+                    <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+                    <mat-datepicker touchUi="true" disabled="false" #endDatePicker></mat-datepicker>
+                </mat-form-field>
+            </div>
+        </form>
+        <google-chart #billChart [data]="billSummaryData" (chartSelect)="chartSelected($event)"
+            ></google-chart>
+
+
+        <table style="width: 100%" mat-table [dataSource]="billTableDataSource">
+
+            <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef> No. </th>
+                <td mat-cell *matCellDef="let element; let i= index"> {{i+1}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="date">
+                <th mat-header-cell *matHeaderCellDef> Date </th>
+                <td mat-cell *matCellDef="let element"> {{element.date | date:'dd-MM-yyyy'}} </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="billNo">
+                <th mat-header-cell *matHeaderCellDef> Bill No </th>
+                <td mat-cell *matCellDef="let element"> {{element.billNo}} </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="customer">
+                <th mat-header-cell *matHeaderCellDef> Customer Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.customerinfo.firstName}} {{element.customerinfo.lastName}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="amount">
+                <th mat-header-cell *matHeaderCellDef>Bill Total</th>
+                <td mat-cell *matCellDef="let element"> {{element.grandTotal}} </td>
+            </ng-container>
+            
+
+            <tr mat-header-row *matHeaderRowDef="billTableColumns"></tr>
+            <tr mat-row (click)="tableRowSelected(row)" *matRowDef="let row; columns: billTableColumns;"></tr>
+        </table>
+
+        <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </mat-card-content>
+</mat-card>

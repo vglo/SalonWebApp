@@ -8,8 +8,17 @@ import { SharedModule } from './shared/shared.module';
 import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers, initialState } from './reducers';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
-import { HomeModule } from './home/home.module';
 import { NotfoundComponent } from './notfound/notfound.component';
+import { MAT_DATE_LOCALE } from '@angular/material';
+import { DatePipe } from '@angular/common';
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import {NgxPermissionsModule} from 'ngx-permissions';
+
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+
+library.add(faCoffee);
+
 
 @NgModule({
   declarations: [
@@ -22,9 +31,13 @@ import { NotfoundComponent } from './notfound/notfound.component';
     BrowserAnimationsModule,
     SharedModule,
     StoreModule.forRoot(reducers, { metaReducers , initialState: initialState}),
-    StoreRouterConnectingModule.forRoot()
+    StoreRouterConnectingModule.forRoot(),
+    NgxPermissionsModule.forRoot()
   ],
-  providers: [],
+  providers: [{provide: MAT_DATE_LOCALE, useValue: 'en-GB'},DatePipe,{
+    provide: STEPPER_GLOBAL_OPTIONS,
+    useValue: { showError: true }
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

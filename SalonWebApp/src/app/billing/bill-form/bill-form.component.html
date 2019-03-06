@@ -7,7 +7,7 @@
         <mat-form-field fxFlex="60%" class="full-width">
           <mat-select required #serviceSelect formControlName="particular" placeholder="Service"
             (selectionChange)="changeRate(i,serviceSelect.selected)">
-            <mat-option *ngFor="let service of salonServices" [value]="service.id"
+            <mat-option *ngFor="let service of salonServices" [value]="service.idSalonService"
               (selectionChange)="changeRate(i,service)">
               {{service.name}}
             </mat-option>
@@ -50,6 +50,28 @@
   <div fxLayout.gt-md="row wrap" fxLayoutAlign.gt-md="space-between center" fxLayoutGap.gt-md="50px">
     <mat-icon fxFlex (click)="addParticular()" matTooltip="Add" matTooltipPosition="above" class="mat-18">add</mat-icon>
     <h3 fxFlex>Total: {{total}}</h3>
+  </div>
+  <div>
+    <mat-form-field>
+      <input (change)="calculateDiscount()" min=0 required value="0" #discountValue matInput type="number" placeholder="Discount" align="right" id="">
+      <mat-error *ngIf="!discountValue.valid">Required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select (selectionChange)="calculateDiscount()" required #discountType placeholder="Discount Type">
+        <mat-option [value]="'percent'">%</mat-option>
+        <mat-option [value]="'discount'">INR</mat-option>
+      </mat-select>
+      <mat-error *ngIf="!discountType.valid">Required</mat-error>
+    </mat-form-field>
+    <mat-form-field fxFlex="15%" class="full-width">
+        <mat-placeholder>
+          <!-- <mat-icon fontSet="fas" fontIcon="fa-rupee"></mat-icon> -->
+          &nbsp; Total Discount
+        </mat-placeholder>
+        <span>{{discount}}</span>
+        <input matInput type="number" hidden formControlName="discount">
+        <mat-icon matPrefix class="mat-icon-12" fontSet="fas" fontIcon="fa-rupee"></mat-icon>
+      </mat-form-field>
   </div>
 
   <!-- <mat-icon (click)="submitForm()" class="mat-18">save</mat-icon> -->
